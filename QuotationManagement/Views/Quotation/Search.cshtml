@@ -1,0 +1,76 @@
+﻿@{
+}
+
+<div>
+	<form >
+		<input placeholder="Quotation code" type="text" />
+		<input placeholder="Quotation name" type="text" />
+		<input placeholder="Customer name" type="text" />
+		<input placeholder="Account code" type="text" />
+		<div>
+			<p>Creation date</p>
+			<div>
+				<label>From</label>
+				<input type="date" />
+			</div>
+			<div>
+				<label>To</label>
+				<input type="date" />
+			</div>
+		</div>
+		<div>
+			<p>Expiration date</p>
+			<div>
+				<label>From</label>
+				<input type="date" />
+			</div>
+			<div>
+				<label>To</label>
+				<input type="date" />
+			</div>
+		</div>
+		<div>
+			<p>Quotation status</p>
+			<div>
+				<input type="checkbox" name="quotation-status-in-progress" value="in-progress" />
+				<input type="checkbox" name="quotation-status-validated" value="validated" />
+				<input type="checkbox" name="quotation-status-expired" value="expired" />
+				<input type="checkbox" name="quotation-status-cancelled" value="cancelled" />
+			</div>
+		</div>
+		<button type="submit">Submit</button>
+	</form>
+	<div>
+		<table>
+			<thead>
+				<tr>
+					<th>Quotation - Version</th>
+					<th>Account code</th>
+					<th>Account name</th>
+					<th>Account city</th>
+					<th>Quotation name</th>
+					<th>Total price</th>
+					<th>Status</th>
+					<th>Accepted by customer</th>
+					<th>Start date</th>
+					<th>Expiration date</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>V5ARQU260001-01</td>
+					<td>ADE040486</td>
+					<td>Langer, Dr.Stefan</td>
+					<td>Berlin</td>
+					<td></td>
+					<td>0.00 EUR</td>
+					<td>In progress</td>
+					<td>false</td>
+					<td>01/23/2026</td>
+					<td>01/23/2027</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+
