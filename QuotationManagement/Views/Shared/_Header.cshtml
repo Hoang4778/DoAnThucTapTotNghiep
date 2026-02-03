@@ -1,4 +1,8 @@
-﻿<header>
+﻿@{
+    string userName = User.Identity.Name;
+}
+
+<header>
     <div>
         <a href="/">
             <img src="" alt="Website logo" width="30" height="30" />
@@ -28,7 +32,7 @@
             <button>
                 <img src="" alt="" width="10" height="10" />
             </button>
-            <p>user name</p>
+            <p>@userName</p>
         </div>
     </div>
 </header>
