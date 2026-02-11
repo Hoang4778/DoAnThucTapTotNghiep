@@ -1,0 +1,123 @@
+﻿@{
+}
+
+<div>
+	<p>Choose the branch</p>
+	<select>
+		<option>EUFR262</option>
+	</select>
+</div>
+<div>
+	<p>Quotation settings</p>
+	<div>
+		<div>
+			<p>Quotation type</p>
+			<div>
+				<div>
+					<input type="radio" name="quotation-type" id="standard-quotation" />
+					<label for="standard-quotation">Standard quotation</label>
+				</div>
+				<div>
+					<input type="radio" name="quotation-type" id="project-quotation" />
+					<label for="project-quotation">Project quotation</label>
+				</div>
+			</div>
+		</div>
+		<div>
+			<p>Default tax rate</p>
+			<div>
+				<input type="number" />
+				<p>%</p>
+			</div>
+		</div>
+		<div>
+			<p>Header & Footer setting</p>
+			<select>
+				<option>Setting 1</option>
+			</select>
+		</div>
+		<div>
+			<p>Global discount and global surcharge</p>
+			<div>
+				<p>Global discount</p>
+				<div>
+					<input type="checkbox" name="global-discount" />
+					<input type="number" name="global-discount-percentage" />
+					<p>%</p>
+				</div>
+			</div>
+			<div>
+				<p>Global surcharge</p>
+				<div>
+					<input type="checkbox" name="global-surcharge" />
+					<input type="number" name="global-surcharge-percentage" />
+					<p>%</p>
+				</div>
+			</div>
+		</div>
+		<div>
+			<p>Quotation document printing settings</p>
+			<div>
+				<input type="checkbox" name="page-break-before-quotation-table" />
+				<p>Display a page break before the quotation table</p>
+			</div>
+			<div>
+				<input type="checkbox" name="display-customer-details"/>
+				<p>Display phone number, email address in the Customer details</p>
+			</div>
+			<div>
+				<input type="checkbox" name="display-quantity-and-unit-price"/>
+				<p>Display quantity and unit price columns</p>
+			</div>
+			<div>
+				<input type="checkbox" name="page-break-after-quotation-table"/>
+				<p>Display a page break before the quotation table</p>
+			</div>
+			<div>
+				<input type="checkbox" name="quotation-start-date"/>
+				<p>Display the quotation start date</p>
+			</div>
+			<div>
+				<input type="checkbox" name="quotation-expiration-date"/>
+				<p>Display the quotation expiration date</p>
+			</div>
+			<div>
+				<p>Customer acceptance signature box</p>
+				<div>
+					<div>
+						<input type="radio" name="signature-box" id="no-signature"/>
+						<label for="no-signature">No signature</label>
+					</div>
+					<div>
+						<input type="radio" name="signature-box" id="standard"/>
+						<label for="standard">Standard</label>
+					</div>
+					<div>
+						<input type="radio" name="signature-box" id="extended"/>
+						<label for="extended">Extended</label>
+					</div>
+				</div>
+			</div>
+			<div>
+				<p>Position of the quotation footer</p>
+				<div>
+					<div>
+						<input type="radio" name="quotation-footer-position" id="after-table-or-totals"/>
+						<label for="after-table-or-totals">After table or totals</label>
+					</div>
+					<div>
+						<input type="radio" name="quotation-footer-position" id="before-signature"/>
+						<label for="before-signature">Before signature</label>
+					</div>
+				</div>
+			</div>
+			<div>
+				<p>Letter top template</p>
+				<select>
+					<option>Sender left, receipient right</option>
+					<option>Receipient left, sender right</option>
+				</select>
+			</div>
+		</div>
+	</div>
+</div>

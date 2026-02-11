@@ -1,22 +1,30 @@
+using DotNetEnv;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore;
+using QuotationManagement.Contexts;
+
+
+
+Env.Load(Path.Combine(Directory.GetCurrentDirectory(), ".env"));
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddAuthentication(options =>
-{
-    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-    //options.DefaultChallengeScheme = GoogleDefaults.AuthenticationScheme;
-})
-.AddCookie(options =>
-{
-    options.LoginPath = "/account/login";
-})
-.AddGoogle(options =>
-{
-    options.ClientId = Environment.GetEnvironmentVariable("SSOClientId");
-    options.ClientSecret =Environment.GetEnvironmentVariable("SSOClientSecret"); 
-});
+builder
+    .Services.AddAuthentication(options =>
+    {
+        options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+        //options.DefaultChallengeScheme = GoogleDefaults.AuthenticationScheme;
+    })
+    .AddCookie(options =>
+    {
+        options.LoginPath = "/account/login";
+    })
+    .AddGoogle(options =>
+    {
+        options.ClientId = Environment.GetEnvironmentVariable("SSO__ClientId");
+        options.ClientSecret = Environment.GetEnvironmentVariable("SSO__ClientSecret");
+    });
 
 builder.Services.AddAuthorization(options =>
 {
@@ -25,6 +33,8 @@ builder.Services.AddAuthorization(options =>
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddDbContext<AppDBContext>(options => options.UseSqlServer(Environment.GetEnvironmentVariable("DBConnectionString")));
 
 var app = builder.Build();
 
@@ -44,29 +54,51 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}");
 app.MapControllerRoute(
     name: "quotation-search",
     defaults: new { controller = "Quotation", action = "Search" },
-    pattern: "/quotation/search");
+    pattern: "/quotation/search"
+);
 app.MapControllerRoute(
     name: "quotation-create",
     defaults: new { controller = "Quotation", action = "Create" },
-    pattern: "/quotation/create");
+    pattern: "/quotation/create"
+);
 app.MapControllerRoute(
     name: "quotation-setup",
     defaults: new { controller = "Quotation", action = "Setup" },
-    pattern: "/quotation/setup");
+    pattern: "/quotation/setup"
+);
 app.MapControllerRoute(
     name: "login",
     defaults: new { controller = "Account", action = "Login" },
-    pattern: "/account/login");
+    pattern: "/account/login"
+);
 app.MapControllerRoute(
     name: "SSOLogin",
     defaults: new { controller = "Account", action = "SSOLogin" },
-    pattern: "/account/SSOLogin");
-
+    pattern: "/account/SSOLogin"
+);
+app.MapControllerRoute(
+    name: "branch-default-settings",
+    defaults: new { controller = "Settings", action = "Default" },
+    pattern: "/settings/default"
+);
+app.MapControllerRoute(
+    name: "branch-header-footer-settings",
+    defaults: new { controller = "Settings", action = "HeaderFooter" },
+    pattern: "/settings/header-footer"
+);
+app.MapControllerRoute(
+    name: "branch-header-footer-settings-create",
+    defaults: new { controller = "Settings", action = "HeaderFooterCreate" },
+    pattern: "/settings/header-footer/create"
+);
+app.MapControllerRoute(
+    name: "branch-header-footer-settings-edit",
+    defaults: new { controller = "Settings", action = "HeaderFooterEdit" },
+    pattern: "/settings/header-footer/edit"
+);
 
 app.Run();
