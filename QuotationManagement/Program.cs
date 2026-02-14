@@ -71,6 +71,21 @@ app.MapControllerRoute(
     pattern: "/quotation/setup"
 );
 app.MapControllerRoute(
+    name: "quotation-table",
+    defaults: new { controller = "Quotation", action = "Table" },
+    pattern: "/quotation/table"
+);
+app.MapControllerRoute(
+    name: "quotation-lifecycle",
+    defaults: new { controller = "Quotation", action = "Lifecycle" },
+    pattern: "/quotation/lifecycle"
+);
+app.MapControllerRoute(
+    name: "quotation-document",
+    defaults: new { controller = "Quotation", action = "Document" },
+    pattern: "/quotation/document"
+);
+app.MapControllerRoute(
     name: "login",
     defaults: new { controller = "Account", action = "Login" },
     pattern: "/account/login"
@@ -98,7 +113,22 @@ app.MapControllerRoute(
 app.MapControllerRoute(
     name: "branch-header-footer-settings-edit",
     defaults: new { controller = "Settings", action = "HeaderFooterEdit" },
-    pattern: "/settings/header-footer/edit"
+    pattern: "/settings/header-footer/edit/{settingCode}"
+);
+app.MapControllerRoute(
+    name: "header-footer-templates",
+    defaults: new { controller = "Settings", action = "HeaderFooterTemplates" },
+    pattern: "/settings/header-footer/templates"
+);
+app.MapControllerRoute(
+    name: "header-footer-templates",
+    defaults: new { controller = "Settings", action = "HeaderFooterTemplatesCreate" },
+    pattern: "/settings/header-footer/templates/create"
+);
+app.MapControllerRoute(
+    name: "header-footer-templates",
+    defaults: new { controller = "Settings", action = "HeaderFooterTemplatesEdit" },
+    pattern: "/settings/header-footer/templates/edit/{templateCode}"
 );
 
 app.Run();

@@ -11,22 +11,58 @@ namespace QuotationManagement.Controllers
 
         public IActionResult Search()
         {
-            return View();
+            return View("/Views/Quotation/Search.cshtml");
         }
 
         public IActionResult Create()
         {
-            return View();
+            return View("/Views/Quotation/Create.cshtml");
         }
 
-        public IActionResult Setup(string quotation_code)
+        public IActionResult Setup(string quotationCode)
         {
-            if (quotation_code == null)
+            if (quotationCode == null)
             {
                 return RedirectToAction("Search");
             }
 
-            ViewData["quotation_code"] = quotation_code;
+            ViewData["quotationCode"] = quotationCode;
+
+            return View();
+        }
+
+        public IActionResult Table(string quotationCode)
+        {
+            if (quotationCode == null)
+            {
+                return RedirectToAction("Search");
+            }
+
+            ViewData["quotationCode"] = quotationCode;
+
+            return View();
+        }
+
+        public IActionResult Lifecycle(string quotationCode)
+        {
+            if (quotationCode == null)
+            {
+                return RedirectToAction("Search");
+            }
+
+            ViewData["quotationCode"] = quotationCode;
+
+            return View();
+        }
+
+        public IActionResult Document(string quotationCode)
+        {
+            if (quotationCode == null)
+            {
+                return RedirectToAction("Search");
+            }
+
+            ViewData["quotationCode"] = quotationCode;
 
             return View();
         }

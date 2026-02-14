@@ -28,5 +28,20 @@ namespace QuotationManagement.Controllers
         {
             return View("/Views/Settings/HeaderFooter/Edit.cshtml");
         }
+
+        public IActionResult HeaderFooterTemplates()
+        {
+            return View("/Views/Settings/HeaderFooterTemplates/Index.cshtml");
+        }
+
+        public IActionResult HeaderFooterTemplatesCreate()
+        {
+            return View("/Views/Settings/HeaderFooterTemplates/Create.cshtml");
+        }
+
+        public IActionResult HeaderFooterTemplatesEdit(string templateCode)
+        {
+            return View("/Views/Settings/HeaderFooterTemplates/Edit.cshtml");
+        }
     }
 }
