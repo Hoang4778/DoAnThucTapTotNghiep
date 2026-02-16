@@ -11,7 +11,7 @@ namespace QuotationManagement.Controllers
 
         public IActionResult Default()
         {
-            return View("/Views/Settings/Index.cshtml");
+            return View("/Views/Settings/Default.cshtml");
         }
 
         public IActionResult HeaderFooter()

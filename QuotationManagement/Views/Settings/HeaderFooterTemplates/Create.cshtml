@@ -1,42 +1,64 @@
 ﻿@{
 }
 
-<div>
-	<div>
-		<p>Header footer template</p>
-		<div>
-			<div>
-				<label>Name</label>
-				<input type="text"/>
+<link rel="stylesheet" href="~/css/settings-header-footer-templates-create.css" />
+<link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">
+
+<form method="post" class="wrapper section-wrapper">
+	<details class="section-template-setting-wrapper" open>
+		<summary class="section-template-setting-title">Header footer template</summary>
+		<div class="section-template-setting-content">
+			<div class="setting-item">
+				<label>Name:</label>
+				<input class="input-template-name" type="text" placeholder="Template name" />
 			</div>
-			<div>
-				<p>Status</p>
-				<p>Active</p>
+			<div class="setting-item">
+				<p>Status:</p>
+				<div>
+					<input type="radio" name="template-status" id="template-active" />
+					<label for="template-active">Active</label>
+				</div>
+				<div>
+					<input type="radio" name="template-status" id="template-inactive" />
+					<label for="template-inactive">Inactive</label>
+				</div>
 			</div>
-			<div>
-				<label>Branch</label>
-				<select>
+			<div class="setting-item">
+				<label>Branch:</label>
+				<select class="select-branch">
 					<option>Lab R something</option>
 				</select>
 			</div>
-			<div>
-				<label>Language</label>
-				<select>
+			<div class="setting-item">
+				<label>Language:</label>
+				<select class="select-language">
 					<option>English</option>
 				</select>
 			</div>
-			<div>
+			<div class="setting-item">
 				<input type="checkbox" name="used-as-header-or-footer" id="used-as-header" />
-				<label for="used-as-header">Useable as header</label>
+				<label for="used-as-header">Usable as header</label>
 			</div>
-			<div>
+			<div class="setting-item">
 				<input type="checkbox" name="used-as-header-or-footer" id="used-as-footer" />
-				<label for="used-as-footer">Useable as footer</label>
+				<label for="used-as-footer">Usable as footer</label>
 			</div>
 		</div>
-	</div>
-	<div>
-		<p>Content</p>
-		<div>WYSIWYG editor here</div>
-	</div>
-</div>
+	</details>
+	<details class="section-template-content" open>
+		<summary class="section-template-content-title">Content</summary>
+		<div class="section-template-content-content">
+			<div id="editor"></div>
+		</div>
+	</details>
+	<button type="submit" class="btn-create-template">
+		<img src="~/images/icons8-save-100.png" width="30" height="30" alt="save-new-template-icon" />
+	</button>
+</form>
+
+<script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
+<script>
+	const quill = new Quill("#editor", {
+	theme: "snow"
+	});
+</script>

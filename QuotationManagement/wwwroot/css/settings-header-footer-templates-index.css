@@ -1,0 +1,21 @@
+﻿.section-wrapper {
+  position: relative;
+}
+.btn-add-template {
+  background-color: var(--primary-color);
+  padding: 0.5rem;
+  border-radius: 0.5rem 0.5rem 0 0;
+  display: grid;
+  place-items: center;
+  width: fit-content;
+  margin: 0 0 0 auto;
+}
+.btn-add-template:hover {
+  opacity: 0.8;
+}
+.action-bar {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  margin: 0 auto;
+}

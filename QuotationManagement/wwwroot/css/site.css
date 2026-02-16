@@ -1,5 +1,16 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Roboto, sans-serif;
+}
+:root {
+  --primary-color: #171b79;
+  --secondary-color: #79addd;
+  --text-secondary-color: white;
+}
+.wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
 }

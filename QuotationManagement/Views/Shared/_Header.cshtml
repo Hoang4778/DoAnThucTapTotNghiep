@@ -1,38 +1,45 @@
 ﻿@{
-    string userName = User.Identity.Name;
+    string userName = User.Identity?.Name ?? "User name not found";
 }
 
-<header>
-    <div>
+<link rel="stylesheet" href="~/css/header.css" />
+
+<header class="header">
+    <div class="wrapper inner-header">
         <a href="/">
-            <img src="" alt="Website logo" width="30" height="30" />
+            <img src="/images/icons8-quotation-100.png" alt="Website logo" width="50" height="50" />
         </a>
-        <nav>
-            <div>
-                <button>Quotation</button>
-                <div>
-                    <a href="/quotation/search">Search</a>
-                    <a href="/quotation/create">Create</a>
-                    <a href="/quotation/setup">Quotation setup</a>
-                    <a href="/quotation/table">Quotation table</a>
-                    <a href="/quotation/lifecycle">Quotation lifecycle</a>
-                    <a href="/quotation/document">Quotation document</a>
+        <nav class="nav-bar">
+            <div class="nav-item">
+                <p class="nav-item-title">Quotation</p>
+                <div class="nav-sub-item">
+                    <div class="nav-inner-sub-item">
+                        <a class="nav-item-link" href="/quotation/search">Search</a>
+                        <a class="nav-item-link" href="/quotation/create">Create</a>
+                        <a class="nav-item-link" href="/quotation/setup">Quotation setup</a>
+                        <a class="nav-item-link" href="/quotation/table">Quotation table</a>
+                        <a class="nav-item-link" href="/quotation/lifecycle">Quotation lifecycle</a>
+                        <a class="nav-item-link" href="/quotation/document">Quotation document</a>
+                    </div>
                 </div>
             </div>
-            <div>
-                <button>Branch settings</button>
-                <div>
-                    <a href="/settings/default">Default settings</a>
-                    <a href="/settings/header-footer">Header & Footer settings</a>
-                    <a href="/settings/header-footer/templates">Header, Footer templates</a>
+            <div class="nav-item">
+                <p class="nav-item-title">Branch settings</p>
+                <div class="nav-sub-item">
+                    <div class="nav-inner-sub-item">
+                        <a class="nav-item-link" href="/settings/default">Default settings</a>
+                        <a class="nav-item-link" href="/settings/header-footer">Header & Footer settings</a>
+                        <a class="nav-item-link" href="/settings/header-footer/templates">Header, Footer templates</a>
+                    </div>
                 </div>
             </div>
         </nav>
-        <div>
-            <button>
-                <img src="" alt="Profile icon" width="10" height="10" />
-            </button>
-            <p>@userName</p>
+        <div class="profile">
+            <a href="/profile">
+                <img src="/images/account_circle_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg" alt="Profile icon"
+                     width="30" height="30" />
+            </a>
+            <p class="profile-name">@userName</p>
         </div>
     </div>
 </header>

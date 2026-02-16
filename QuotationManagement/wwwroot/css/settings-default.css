@@ -1,0 +1,29 @@
+﻿.section-wrapper {
+    padding: 1rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    font-size: 1.2rem;
+}
+
+.branch-option {
+    display: flex;
+    gap: 1rem;
+}
+
+.btn-save,
+.btn-discard-change {
+    background-color: var(--primary-color);
+    padding: 0.5rem;
+    border-radius: 0.5rem 0 0 0.5rem;
+}
+
+.settings-form {
+    position: relative;
+}
+
+.settings-action {
+    position: sticky;
+    bottom: 0;
+    right: 0;
+}
