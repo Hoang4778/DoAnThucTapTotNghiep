@@ -1,46 +1,56 @@
-﻿@{
+﻿@model QuotationManagement.Models.ViewModels.HeaderFooterTemplate_Create 
+
+@{
 }
 
 <link rel="stylesheet" href="~/css/settings-header-footer-templates-create.css" />
 <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">
 
-<form method="post" class="wrapper section-wrapper">
+<form method="post" class="wrapper section-wrapper" data-puid="@Model.userPUID">
 	<details class="section-template-setting-wrapper" open>
 		<summary class="section-template-setting-title">Header footer template</summary>
 		<div class="section-template-setting-content">
 			<div class="setting-item">
-				<label>Name:</label>
-				<input class="input-template-name" type="text" placeholder="Template name" />
+				<label for="template-name">Name:</label>
+				<input class="input-template-name" type="text" placeholder="Template name" id="template-name" name="template-name"/>
 			</div>
 			<div class="setting-item">
 				<p>Status:</p>
 				<div>
-					<input type="radio" name="template-status" id="template-active" />
+					<input type="radio" name="template-status" id="template-active" value="true" />
 					<label for="template-active">Active</label>
 				</div>
 				<div>
-					<input type="radio" name="template-status" id="template-inactive" />
+					<input type="radio" name="template-status" id="template-inactive" value="false"/>
 					<label for="template-inactive">Inactive</label>
 				</div>
 			</div>
 			<div class="setting-item">
-				<label>Branch:</label>
-				<select class="select-branch">
-					<option>Lab R something</option>
+				<label for="branch-option">Branch:</label>
+				<select class="select-branch" id="branch-option" name="branchCode">
+					<option value=""></option>
+					@foreach (var branch in Model.branchList)
+					{
+						<option value="@branch.branchCode">@branch.name</option>
+					}
 				</select>
 			</div>
 			<div class="setting-item">
-				<label>Language:</label>
-				<select class="select-language">
-					<option>English</option>
+				<label for="language-option">Language:</label>
+				<select class="select-language" id="language-option" name="language">
+					<option value=""></option>
+					@foreach (var language in Model.languageList)
+					{
+						<option value="@language.languageCode - @language.languageName">@language.languageName</option>
+					}
 				</select>
 			</div>
 			<div class="setting-item">
-				<input type="checkbox" name="used-as-header-or-footer" id="used-as-header" />
+				<input type="checkbox" name="usableAsHeader" id="used-as-header" />
 				<label for="used-as-header">Usable as header</label>
 			</div>
 			<div class="setting-item">
-				<input type="checkbox" name="used-as-header-or-footer" id="used-as-footer" />
+				<input type="checkbox" name="usableAsFooter" id="used-as-footer" />
 				<label for="used-as-footer">Usable as footer</label>
 			</div>
 		</div>
@@ -55,6 +65,9 @@
 		<img src="~/images/icons8-save-100.png" width="30" height="30" alt="save-new-template-icon" />
 	</button>
 </form>
+<div class="loading-part">
+	<img src="~/images/blendertimer-load-36_128.gif" width="50" height="50" alt="loading-image" />
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
 <script>
@@ -62,3 +75,4 @@
 	theme: "snow"
 	});
 </script>
+<script src="~/js/settings-header-footer-templates-create.js" defer></script>

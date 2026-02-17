@@ -1,5 +1,6 @@
-﻿@{
-    ViewData["Title"] = "Error";
+﻿@model QuotationManagement.Models.Error
+@{
 }
 
-<h1>Error</h1>
+<h1> Error @(Model.code)</h1>
+<p>@(Model.message)</p>

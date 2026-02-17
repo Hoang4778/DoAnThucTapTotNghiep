@@ -4,8 +4,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using QuotationManagement.Contexts;
 
-
-
 Env.Load(Path.Combine(Directory.GetCurrentDirectory(), ".env"));
 
 var builder = WebApplication.CreateBuilder(args);
@@ -35,6 +33,8 @@ builder.Services.AddAuthorization(options =>
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<AppDBContext>(options => options.UseSqlServer(Environment.GetEnvironmentVariable("DBConnectionString")));
+
+builder.Services.AddHttpClient();
 
 var app = builder.Build();
 
