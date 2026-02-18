@@ -12,7 +12,7 @@
 		<div class="section-template-setting-content">
 			<div class="setting-item">
 				<label for="template-name">Name:</label>
-				<input class="input-template-name" type="text" placeholder="Template name" id="template-name" name="template-name"/>
+				<input class="input-template-name" type="text" placeholder="Template name" id="template-name" name="template-name" maxlength="100"/>
 			</div>
 			<div class="setting-item">
 				<p>Status:</p>
@@ -68,6 +68,7 @@
 <div class="loading-part">
 	<img src="~/images/blendertimer-load-36_128.gif" width="50" height="50" alt="loading-image" />
 </div>
+@await Html.PartialAsync("_Popup")
 
 <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
 <script>

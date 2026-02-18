@@ -1,4 +1,6 @@
-﻿@{
+﻿@model List<QuotationManagement.Models.HeaderFooterTemplate>
+
+@{
 }
 
 <link rel="stylesheet" href="~/css/settings-header-footer-templates-index.css" />
@@ -15,15 +17,18 @@
 				<th>Usable as footer</th>
 				<th>Status</th>
 			</tr>
-			<tr>
-				<td>HFTQUEUANNA00001</td>
-				<td>Test HFT</td>
-				<td>EUANNA</td>
-				<td>English</td>
-				<td>true</td>
-				<td>true</td>
-				<td>Active</td>
-			</tr>
+			@foreach (var template in Model)
+			{
+				<tr>
+					<td><a href="/settings/header-footer/templates/edit/@template.code" class="template-edit-link">@template.code</a></td>
+					<td>@template.name</td>
+					<td>@template.branchCode</td>
+					<td>@template.languageName</td>
+					<td>@template.usableAsHeader</td>
+					<td>@template.usableAsFooter</td>
+					<td>@template.status</td>
+				</tr>
+			}
 		</table>
 	</div>
 	<div class="action-bar">

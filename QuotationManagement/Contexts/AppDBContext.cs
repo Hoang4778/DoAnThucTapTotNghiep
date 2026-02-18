@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using QuotationManagement.Models;
 
 namespace QuotationManagement.Contexts
 {
@@ -6,5 +7,6 @@ namespace QuotationManagement.Contexts
     {
         public AppDBContext(DbContextOptions<AppDBContext> options) : base(options) { }
 
+        public DbSet<HeaderFooterTemplate> HeaderFooter_Template { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 ﻿.section-wrapper {
   position: relative;
+  padding: 1rem 0;
 }
 .btn-add-template {
   background-color: var(--primary-color);
@@ -18,4 +19,14 @@
   bottom: 0;
   width: 100%;
   margin: 0 auto;
+}
+tr td {
+  padding: 0.5rem;
+  text-align: center;
+}
+.template-edit-link {
+  color: var(--primary-color);
+}
+.template-edit-link:hover {
+  text-decoration: none;
 }

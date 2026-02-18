@@ -2,6 +2,7 @@
 using System.Security.Claims;
 using System.Text.Json;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using QuotationManagement.Contexts;
 using QuotationManagement.Models;
 using QuotationManagement.Models.ExternalModels;
@@ -47,9 +48,22 @@ namespace QuotationManagement.Controllers
             return View("/Views/Settings/HeaderFooter/Edit.cshtml");
         }
 
-        public IActionResult HeaderFooterTemplates()
+        public async Task<IActionResult> HeaderFooterTemplates()
         {
-            return View("/Views/Settings/HeaderFooterTemplates/Index.cshtml");
+            try
+            {
+                var templates = await _dbContext.HeaderFooter_Template.ToListAsync();
+
+                return View("/Views/Settings/HeaderFooterTemplates/Index.cshtml", templates);
+            }
+            catch (Exception ex)
+            {
+                return View("/Views/Shared/Error.cshtml", new Error
+                {
+                    message = ex.Message,
+                    code = System.Net.HttpStatusCode.InternalServerError
+                });
+            }
         }
 
         public async Task<IActionResult> HeaderFooterTemplatesCreate()
@@ -146,7 +160,6 @@ namespace QuotationManagement.Controllers
                 });
             }
 
-
             HeaderFooterTemplate_Create viewModel = new HeaderFooterTemplate_Create()
             {
                 languageList = languages ?? new List<Language>(),
@@ -157,9 +170,117 @@ namespace QuotationManagement.Controllers
             return View("/Views/Settings/HeaderFooterTemplates/Create.cshtml", viewModel);
         }
 
-        public IActionResult HeaderFooterTemplatesEdit(string templateCode)
+        public async Task<IActionResult> HeaderFooterTemplatesEdit(string templateCode)
         {
-            return View("/Views/Settings/HeaderFooterTemplates/Edit.cshtml");
+            List<IMBranch> branches = new List<IMBranch>();
+            string userPUID = "";
+            HeaderFooterTemplate template = new HeaderFooterTemplate();
+
+            var IMApiToken = Environment.GetEnvironmentVariable("IM_API_Access_Token");
+            var IMApiEndpoint = Environment.GetEnvironmentVariable("IM_API_Endpoint");
+
+            var languageFilePath = Path.Combine(_env.WebRootPath, "languages", "languages.json");
+            var json = System.IO.File.ReadAllText(languageFilePath);
+            var languages = JsonSerializer.Deserialize<List<Language>>(json);
+
+            try
+            {
+                var IMIdentityRequest = new HttpRequestMessage(
+                    HttpMethod.Get,
+                    IMApiEndpoint + $"/identities?filters[emailAddress][$eq]={User.FindFirst(ClaimTypes.Email)?.Value}&populate=sales_scopes&fields[0]=PUID"
+                );
+                IMIdentityRequest.Headers.Authorization =
+                    new AuthenticationHeaderValue("Bearer", IMApiToken);
+                var IMIdentityResponse = await _httpClient.SendAsync(IMIdentityRequest);
+
+                if (!IMIdentityResponse.IsSuccessStatusCode)
+                {
+                    return View("/Views/Shared/Error.cshtml", new Error
+                    {
+                        message = IMIdentityResponse.ReasonPhrase,
+                        code = IMIdentityResponse.StatusCode
+                    });
+                }
+
+                var IMIdentityRawData = await IMIdentityResponse.Content.ReadAsStringAsync();
+                var IMIdentityGeneralResponse = JsonSerializer.Deserialize<IMIdentityResponse>(IMIdentityRawData);
+
+                if (IMIdentityGeneralResponse?.data.Count == 0)
+                {
+                    return View("/Views/Shared/Error.cshtml", new Error
+                    {
+                        message = "No user information found. Please try again later.",
+                        code = System.Net.HttpStatusCode.NotFound
+                    });
+                }
+
+                IMIdentity user = IMIdentityGeneralResponse?.data[0];
+                userPUID = user.PUID;
+                var salesScopes = user.sales_scopes.Select(user => user.countryCode);
+                List<string> filterParamList = new List<string>();
+                string filterParamStr = "";
+
+                int i = 0;
+                foreach (var salesScope in salesScopes)
+                {
+                    filterParamList.Add($"filters[country][$in][{i}]={salesScope}");
+                    i += 1;
+                }
+                filterParamStr = string.Join("&", filterParamList);
+
+                var request = new HttpRequestMessage(
+                    HttpMethod.Get,
+                    IMApiEndpoint + $"/branches?pagination[pageSize]=100&fields[0]=name&fields[1]=branchCode&{filterParamStr}"
+                );
+                request.Headers.Authorization =
+                    new AuthenticationHeaderValue("Bearer", IMApiToken);
+
+                var response = await _httpClient.SendAsync(request);
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    return View("/Views/Shared/Error.cshtml", new Error
+                    {
+                        message = response.ReasonPhrase,
+                        code = response.StatusCode
+                    });
+                }
+
+                var rawData = await response.Content.ReadAsStringAsync();
+                var generalResponse = JsonSerializer.Deserialize<IMBranchResponse>(rawData);
+                branches = generalResponse != null ? generalResponse.data : new List<IMBranch>();
+
+                var searchedTemplate = await _dbContext.HeaderFooter_Template.Where(template => template.code == templateCode).FirstOrDefaultAsync();
+
+                if (searchedTemplate == null)
+                {
+                    return View("/Views/Shared/Error.cshtml", new Error
+                    {
+                        message = "No header/footer template found. Please try again later.",
+                        code = System.Net.HttpStatusCode.NotFound
+                    });
+                }
+
+                template = searchedTemplate;
+            }
+            catch (Exception ex)
+            {
+                return View("/Views/Shared/Error.cshtml", new Error
+                {
+                    message = ex.Message,
+                    code = System.Net.HttpStatusCode.InternalServerError
+                });
+            }
+
+            HeaderFooterTemplate_Edit viewModel = new HeaderFooterTemplate_Edit()
+            {
+                languageList = languages ?? new List<Language>(),
+                branchList = branches,
+                userPUID = userPUID,
+                template = template
+            };
+
+            return View("/Views/Settings/HeaderFooterTemplates/Edit.cshtml", viewModel);
         }
     }
 }

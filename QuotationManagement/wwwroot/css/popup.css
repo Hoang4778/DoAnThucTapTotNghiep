@@ -1,0 +1,26 @@
+﻿.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}
+#popup-message {
+  text-align: center;
+}
+#popup-close {
+  background-color: var(--primary-color);
+  color: var(--text-secondary-color);
+  padding: 0.5rem;
+  border-radius: 0.2rem;
+  margin: 1rem auto 0;
+  border: none;
+  display: block;
+}
+.hidden {
+  display: none;
+}
