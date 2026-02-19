@@ -1,84 +1,77 @@
 ﻿.section-wrapper {
-  padding: 1rem 0;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  font-size: 1.2rem;
-  position: relative;
+    padding: 1rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    font-size: 1.2rem;
+    position: relative;
 }
+
 .section-template-setting-wrapper,
 .section-template-content {
-  border: 1px solid var(--secondary-color);
+    border: 1px solid var(--secondary-color);
 }
+
 .section-template-setting-title,
 .section-template-content-title {
-  padding: 1rem;
-  background-color: var(--secondary-color);
-  color: var(--text-secondary-color);
-  cursor: pointer;
+    padding: 1rem;
+    background-color: var(--secondary-color);
+    color: var(--text-secondary-color);
+    cursor: pointer;
 }
+
 .section-template-setting-content,
 .section-template-content-content {
-  padding: 1rem;
+    padding: 1rem;
 }
+
 .btn-create-template {
-  width: fit-content;
-  background-color: var(--primary-color);
-  padding: 0.5rem;
-  display: grid;
-  place-items: center;
-  border: none;
-  position: sticky;
-  bottom: 0;
-  margin: 0 0 0 auto;
-  cursor: pointer;
+    width: fit-content;
+    background-color: var(--primary-color);
+    padding: 0.5rem;
+    display: grid;
+    place-items: center;
+    border: none;
+    position: sticky;
+    bottom: 0;
+    margin: 0 0 0 auto;
+    cursor: pointer;
 }
-.btn-create-template:hover {
-  opacity: 0.8;
-}
+
+    .btn-create-template:hover {
+        opacity: 0.8;
+    }
+
 .section-template-content-content #editor {
-  min-height: 15rem;
+    min-height: 15rem;
 }
+
 .setting-item {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
 }
+
 .section-template-setting-content {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 }
+
 .input-template-name {
-  font-size: 1.2rem;
-  padding: 0.5rem;
-  border-radius: 0.5rem;
-  border: 1px solid lightgray;
-  max-width: 20rem;
-  width: 100%;
+    font-size: 1.2rem;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    border: 1px solid lightgray;
+    max-width: 20rem;
+    width: 100%;
 }
+
 .select-branch,
 .select-language {
-  font-size: 1.2rem;
-  padding: 0.5rem;
-  background-color: white;
-  border: 1px solid lightgray;
-  border-radius: 0.5rem;
-}
-.loading-part {
-  display: none;
-}
-.loading-part.active {
-  display: grid;
-  place-items: center;
-  position: fixed;
-  z-index: 20;
-  background-color: rgba(0, 0, 0, 0.5);
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-.loading-part.active body {
-  overflow: hidden;
+    font-size: 1.2rem;
+    padding: 0.5rem;
+    background-color: white;
+    border: 1px solid lightgray;
+    border-radius: 0.5rem;
 }

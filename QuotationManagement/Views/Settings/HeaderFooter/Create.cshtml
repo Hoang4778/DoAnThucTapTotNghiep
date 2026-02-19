@@ -1,44 +1,97 @@
-﻿@{
+﻿@model QuotationManagement.Models.ViewModels.HeaderFooterSetting_Create
+
+@{
 }
 
-<div>
-	<p>Header & footer setting</p>
-	<div>
-		<label for="setting-name">Name</label>
-		<input type="text" name="header-footer-setting-name" id="setting-name" />
-	</div>
-	<div>
-		<p>Status</p>
-		<p>Active</p>
-	</div>
-	<div>
-		<label for="branch-name">Branch</label>
-		<select id="branch-name">
-			<option>Lab R something</option>
-		</select>
-	</div>
-	<div>
-		<label for="setting-language">Language</label>
-		<select id="setting-language">
-			<option>English</option>
-		</select>
-	</div>
-</div>
-<div>
-	<p>Header template</p>
-	<div>
-		<select>
-			<option>Template 1</option>
-		</select>
-		<textarea rows="5" cols="50"></textarea>
-	</div>
-</div>
-<div>
-	<p>Footer template</p>
-	<div>
-		<select>
-			<option>Template 2</option>
-		</select>
-		<textarea rows="5" cols="50"></textarea>
-	</div>
-</div>
+<link rel="stylesheet" href="~/css/settings-header-footer-create.css" />
+<link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">
+
+<form method="post" class="wrapper section-wrapper" data-puid="@Model.userPUID">
+	<details class="section-header-footer-setting-wrapper" open>
+		<summary class="section-header-footer-setting-title">Header & footer setting</summary>
+		<div class="section-header-footer-setting-content">
+			<div class="setting-item">
+				<label for="setting-name">Name:</label>
+				<input class="input-setting-name" type="text" name="header-footer-setting-name" id="setting-name" />
+			</div>
+			<div class="setting-item">
+				<p>Status:</p>
+				<div>
+					<input type="radio" name="setting-status" id="setting-active" value="true" />
+					<label for="setting-active">Active</label>
+				</div>
+				<div>
+					<input type="radio" name="setting-status" id="setting-inactive" value="false" />
+					<label for="setting-inactive">Inactive</label>
+				</div>
+			</div>
+			<div class="setting-item">
+				<label for="branch-option">Branch:</label>
+				<select class="select-branch" id="branch-option" name="branchCode">
+					<option value=""></option>
+					@foreach (var branch in Model.branchList)
+					{
+						<option value="@branch.branchCode">@branch.name</option>
+					}
+				</select>
+			</div>
+			<div class="setting-item">
+				<label for="language-option">Language:</label>
+				<select class="select-language" id="language-option" name="language">
+					<option value=""></option>
+					@foreach (var language in Model.languageList)
+					{
+						<option value="@language.languageCode - @language.languageName">@language.languageName</option>
+					}
+				</select>
+			</div>
+		</div>
+	</details>
+	<details class="section-header-template-wrapper" open>
+		<summary class="section-header-template-title">Header template</summary>
+		<div class="section-header-template-content">
+			<select class="select-header-template">
+				<option value=""></option>
+				@foreach (var template in Model.headerTemplates)
+				{
+					<option value="@template.code">@template.name</option>
+				}
+			</select>
+			<div class="header-template-content">
+				<div id="header-template"></div>
+			</div>
+		</div>
+	</details>
+	<details class="section-footer-template-wrapper" open>
+		<summary class="section-footer-template-title">Footer template</summary>
+		<div class="section-footer-template-content">
+			<select class="select-footer-template">
+				<option value=""></option>
+				@foreach (var template in Model.footerTemplates)
+				{
+					<option value="@template.code">@template.name</option>
+				}
+			</select>
+			<div class="footer-template-content">
+				<div id="footer-template"></div>
+			</div>
+		</div>
+	</details>
+	<button type="submit" class="btn-create-setting">
+		<img src="~/images/icons8-save-100.png" width="30" height="30" alt="save-new-setting-icon" />
+	</button>
+</form>
+@await Html.PartialAsync("_LoadingPart")
+@await Html.PartialAsync("_Popup")
+
+<script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
+<script>
+	const quill1 = new Quill("#header-template", {
+	theme: "snow"
+	});
+
+	const quill2 = new Quill("#footer-template", {
+	theme: "snow"
+	});
+</script>
+<script src="~/js/settings-header-footer-create.js" defer></script>

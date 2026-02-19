@@ -8,5 +8,6 @@ namespace QuotationManagement.Contexts
         public AppDBContext(DbContextOptions<AppDBContext> options) : base(options) { }
 
         public DbSet<HeaderFooterTemplate> HeaderFooter_Template { get; set; }
+        public DbSet<HeaderFooterSetting> HeaderFooter_Setting { get; set; }
     }
 }
