@@ -1,19 +1,38 @@
-﻿@{
+﻿@model List<QuotationManagement.Models.HeaderFooterSetting>
+
+@{
 }
 
-<table>
-	<tr>
-		<th>Code</th>
-		<th>Name</th>
-		<th>Branch code</th>
-		<th>Language</th>
-		<th>Status</th>
-	</tr>
-	<tr>
-		<td>HFSDEEUAA180001</td>
-		<td>Standard quotation Ing.Buro EFU</td>
-		<td>EUAA18</td>
-		<td>German</td>
-		<td>Active</td>
-	</tr>
-</table>
+<link rel="stylesheet" href="~/css/settings-header-footer-index.css" />
+
+<div class="section-wrapper">
+	<div class="wrapper">
+		<table width="100%">
+			<tr>
+				<th>Code</th>
+				<th>Name</th>
+				<th>Branch code</th>
+				<th>Language</th>
+				<th>Status</th>
+			</tr>
+			@foreach (var template in Model)
+			{
+				<tr>
+					<td><a href="/settings/header-footer/edit/@template.code" class="setting-edit-link">@template.code</a>
+					</td>
+					<td>@template.name</td>
+					<td>@template.branchCode</td>
+					<td>@template.languageName</td>
+					<td>@template.status</td>
+				</tr>
+			}
+		</table>
+	</div>
+	<div class="action-bar">
+		<div class="wrapper">
+			<a class="btn-add-setting" href="/settings/header-footer/create">
+				<img src="~/images/icons8-plus-100.png" width="30" height="30" alt="add-template-icon" />
+			</a>
+		</div>
+	</div>
+</div>

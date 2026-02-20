@@ -1,0 +1,32 @@
+﻿.section-wrapper {
+  position: relative;
+  padding: 1rem 0;
+}
+.btn-add-setting {
+  background-color: var(--primary-color);
+  padding: 0.5rem;
+  border-radius: 0.5rem 0.5rem 0 0;
+  display: grid;
+  place-items: center;
+  width: fit-content;
+  margin: 0 0 0 auto;
+}
+.btn-add-setting:hover {
+  opacity: 0.8;
+}
+.action-bar {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  margin: 0 auto;
+}
+tr td {
+  padding: 0.5rem;
+  text-align: center;
+}
+.setting-edit-link {
+  color: var(--primary-color);
+}
+.setting-edit-link:hover {
+  text-decoration: none;
+}

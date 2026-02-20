@@ -45,11 +45,11 @@ selectFooterTemplate.onchange = () => {
   }
 };
 
-const btnCreateSetting = document.querySelector(".btn-create-setting");
+const btnEditSetting = document.querySelector(".btn-edit-setting");
 const loadingPart = document.querySelector(".loading-part");
 const formWrapper = document.querySelector("form.wrapper");
 
-btnCreateSetting.onclick = (e) => {
+btnEditSetting.onclick = (e) => {
   e.preventDefault();
   loadingPart.classList.add("active");
 
@@ -73,12 +73,14 @@ btnCreateSetting.onclick = (e) => {
   );
 
   const userPUID = formWrapper.dataset.puid;
+  const settingId = formWrapper.dataset.settingId;
   const languageTuple =
     inputLanguage.value != ""
       ? inputLanguage.value.split(" - ")
       : ["en", "English"];
 
   const setting = {
+    id: parseInt(settingId),
     code: userPUID,
     name:
       inputSettingName.value != ""
@@ -107,7 +109,7 @@ btnCreateSetting.onclick = (e) => {
         : selectFooterTemplate.value,
   };
 
-  fetch("/api/settings/header-footer/create", {
+  fetch("/api/settings/header-footer/edit", {
     method: "post",
     "Content-Type": "application/json",
     body: JSON.stringify(setting),

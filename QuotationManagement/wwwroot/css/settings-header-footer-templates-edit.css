@@ -8,10 +8,12 @@
 }
 
 .section-template-setting-wrapper,
+.section-settings-linked-wrapper,
 .section-template-content {
   border: 1px solid var(--secondary-color);
 }
 
+.section-settings-linked-title,
 .section-template-setting-title,
 .section-template-content-title {
   padding: 1rem;
@@ -20,6 +22,7 @@
   cursor: pointer;
 }
 
+.section-settings-linked-content,
 .section-template-setting-content,
 .section-template-content-content {
   padding: 1rem;
@@ -74,4 +77,16 @@
   background-color: white;
   border: 1px solid lightgray;
   border-radius: 0.5rem;
+}
+.section-settings-linked-content table {
+  text-align: center;
+}
+.section-settings-linked-content table tr td {
+  padding: 0.5rem;
+}
+.setting-edit-link {
+  color: var(--primary-color);
+}
+.setting-edit-link:hover {
+  text-decoration: none;
 }

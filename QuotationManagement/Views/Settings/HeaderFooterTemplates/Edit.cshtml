@@ -1,4 +1,4 @@
-﻿@model QuotationManagement.Models.ViewModels.HeaderFooterTemplate_Edit 
+﻿@model QuotationManagement.Models.ViewModels.HeaderFooterTemplate_Edit
 
 @{
 }
@@ -6,22 +6,26 @@
 <link rel="stylesheet" href="~/css/settings-header-footer-templates-edit.css" />
 <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">
 
-<form method="post" class="wrapper section-wrapper" data-template-id="@Model.template.id" data-template-code="@Model.template.code">
+<form method="post" class="wrapper section-wrapper" data-template-id="@Model.template.id"
+	  data-template-code="@Model.template.code">
 	<details class="section-template-setting-wrapper" open>
 		<summary class="section-template-setting-title">Header footer template</summary>
 		<div class="section-template-setting-content">
 			<div class="setting-item">
 				<label for="template-name">Name:</label>
-				<input class="input-template-name" type="text" placeholder="Template name" id="template-name" name="template-name" maxlength="100" value="@Model.template.name"/>
+				<input class="input-template-name" type="text" placeholder="Template name" id="template-name"
+					   name="template-name" maxlength="100" value="@Model.template.name" />
 			</div>
 			<div class="setting-item">
 				<p>Status:</p>
 				<div>
-					<input type="radio" name="template-status" id="template-active" value="true" checked="@(Model.template.status == true ? true : false)"/>
+					<input type="radio" name="template-status" id="template-active" value="true"
+						   checked="@(Model.template.status == true ? true : false)" />
 					<label for="template-active">Active</label>
 				</div>
 				<div>
-					<input type="radio" name="template-status" id="template-inactive" value="false" checked="@(Model.template.status == false ? true: false)"/>
+					<input type="radio" name="template-status" id="template-inactive" value="false"
+						   checked="@(Model.template.status == false ? true : false)" />
 					<label for="template-inactive">Inactive</label>
 				</div>
 			</div>
@@ -31,50 +35,65 @@
 					<option value="" selected="@(Model.template.branchCode == null)"></option>
 					@foreach (var branch in Model.branchList)
 					{
-						<option value="@branch.branchCode" selected="@(Model.template.branchCode == branch.branchCode)">@branch.name</option>
-					}
-				</select>
+						<option value="@branch.branchCode" selected="@(Model.template.branchCode == branch.branchCode)">
+							@branch.name</option>
+						}
+					</select>
+				</div>
+				<div class="setting-item">
+					<label for="language-option">Language:</label>
+					<select class="select-language" id="language-option" name="language">
+						<option value="" selected="@(Model.template.languageCode == null)"></option>
+						@foreach (var language in Model.languageList)
+						{
+							<option value="@language.languageCode - @language.languageName"
+									selected="@(Model.template.languageCode == language.languageCode)">@language.languageName
+							</option>
+						}
+					</select>
+				</div>
+				<div class="setting-item">
+					<input type="checkbox" name="usableAsHeader" id="used-as-header"
+						   checked="@Model.template.usableAsHeader" />
+					<label for="used-as-header">Usable as header</label>
+				</div>
+				<div class="setting-item">
+					<input type="checkbox" name="usableAsFooter" id="used-as-footer"
+						   checked="@Model.template.usableAsFooter" />
+					<label for="used-as-footer">Usable as footer</label>
+				</div>
 			</div>
-			<div class="setting-item">
-				<label for="language-option">Language:</label>
-				<select class="select-language" id="language-option" name="language">
-					<option value="" selected="@(Model.template.languageCode == null)"></option>
-					@foreach (var language in Model.languageList)
+		</details>
+		<details class="section-template-content" open>
+			<summary class="section-template-content-title">Content</summary>
+			<div class="section-template-content-content">
+				<div id="editor">@Html.Raw(Model.template.content)</div>
+			</div>
+		</details>
+		<details class="section-settings-linked-wrapper" open>
+			<summary class="section-settings-linked-title">Header footer settings linked</summary>
+			<div class="section-settings-linked-content">
+				<table width="100%">
+					<tr>
+						<th>Code</th>
+						<th>Name</th>
+						<th>Branch</th>
+						<th>Used as header</th>
+						<th>Used as footer</th>
+					</tr>
+					@foreach (var setting in Model.linkedSettings)
 					{
-						<option value="@language.languageCode - @language.languageName" selected="@(Model.template.languageCode == language.languageCode)">@language.languageName</option>
-					}
-				</select>
-			</div>
-			<div class="setting-item">
-				<input type="checkbox" name="usableAsHeader" id="used-as-header" checked="@Model.template.usableAsHeader"/>
-				<label for="used-as-header">Usable as header</label>
-			</div>
-			<div class="setting-item">
-				<input type="checkbox" name="usableAsFooter" id="used-as-footer" checked="@Model.template.usableAsFooter"/>
-				<label for="used-as-footer">Usable as footer</label>
-			</div>
+						<tr>
+						<td><a href="/settings/header-footer/edit/@setting.code" class="setting-edit-link">@setting.code</a>
+						</td>
+						<td>@setting.name</td>
+						<td>@setting.branchCode</td>
+						<td>@(setting.linkedHeaderTemplateCode != null ? true : false)</td>
+						<td>@(setting.linkedFooterTemplateCode != null ? true : false)</td>
+					</tr>
+				}
+			</table>
 		</div>
-	</details>
-	<details class="section-template-content" open>
-		<summary class="section-template-content-title">Content</summary>
-		<div class="section-template-content-content">
-			<div id="editor">@Html.Raw(Model.template.content)</div>
-		</div>
-	</details>
-	<details>
-		<summary class="section-settings-linked">Header footer settings linked</summary>
-		<table>
-			<tr>
-				<th>Code</th>
-				<th>Name</th>
-				<th>Branch</th>
-			</tr>
-			<tr>
-				<td>HFSQUEUANNA00001</td>
-				<td>Name</td>
-				<td>Branch</td>
-			</tr>
-		</table>
 	</details>
 	<button type="submit" class="btn-edit-template">
 		<img src="~/images/icons8-save-100.png" width="30" height="30" alt="save-template-icon" />
@@ -90,5 +109,3 @@
 	});
 </script>
 <script src="~/js/settings-header-footer-templates-edit.js" defer></script>
-
-

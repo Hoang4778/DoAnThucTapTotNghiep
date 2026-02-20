@@ -105,5 +105,18 @@ namespace QuotationManagement.Controllers.API
                 return new JsonResult(new ApiResponse { isOkay = false, message = ex.Message, data = null });
             }
         }
+
+        [Route("api/header-footer-template/get-one-template/{code}")]
+        public async Task<JsonResult> getTemplateContentByCode(string code)
+        {
+            var searchedTemplate = await _appDBContext.HeaderFooter_Template.Where(template => template.code == code).FirstOrDefaultAsync();
+
+            if (searchedTemplate == null)
+            {
+                return new JsonResult(new ApiResponse { data = null, isOkay = false, message = "The template was not found. Please try again." });
+            }
+
+            return new JsonResult(new ApiResponse { data = searchedTemplate, isOkay = true, message = "The template was found." });
+        }
     }
 }

@@ -1,134 +1,144 @@
-﻿@{
+﻿@model List<QuotationManagement.Models.ExternalModels.IMBranch>
+
+@{
 }
 
 <link rel="stylesheet" href="~/css/settings-default.css" />
 
 <div class="wrapper section-wrapper">
 	<div class="branch-option">
-		<p>Choose the branch:</p>
-		<select>
-			<option>EUFR262</option>
+		<label for="branch-option">Choose the branch:</label>
+		<select id="branch-option" class="select-branch">
+			<option value=""></option>
+			@foreach (var branch in Model)
+			{
+				<option value="@branch.branchCode">@branch.name</option>
+			}
 		</select>
 	</div>
 	<form method="post" class="settings-form">
-		<p>Quotation settings</p>
-		<div>
-			<div>
-				<p>Quotation type</p>
-				<div>
-					<div>
-						<input type="radio" name="quotation-type" id="standard-quotation" />
-						<label for="standard-quotation">Standard quotation</label>
+		<div class="form-wrapper">
+			<details class="section-quotation-settings-wrapper" open>
+				<summary class="section-quotation-settings-title">Quotation settings</summary>
+				<div class="section-quotation-settings-content">
+					<div class="setting-item">
+						<p>Quotation type</p>
+						<div>
+							<input type="radio" name="quotation-type" id="standard-quotation" />
+							<label for="standard-quotation">Standard quotation</label>
+						</div>
+						<div>
+							<input type="radio" name="quotation-type" id="project-quotation" />
+							<label for="project-quotation">Project quotation</label>
+						</div>
 					</div>
-					<div>
-						<input type="radio" name="quotation-type" id="project-quotation" />
-						<label for="project-quotation">Project quotation</label>
-					</div>
-				</div>
-			</div>
-			<div>
-				<p>Default tax rate</p>
-				<div>
-					<input type="number" />
-					<p>%</p>
-				</div>
-			</div>
-			<div>
-				<p>Header & Footer setting</p>
-				<select>
-					<option>Setting 1</option>
-				</select>
-			</div>
-			<div>
-				<p>Global discount and global surcharge</p>
-				<div>
-					<p>Global discount</p>
-					<div>
-						<input type="checkbox" name="global-discount" />
-						<input type="number" name="global-discount-percentage" />
+					<div class="setting-item">
+						<p>Default tax rate</p>
+						<input type="number" />
 						<p>%</p>
 					</div>
-				</div>
-				<div>
-					<p>Global surcharge</p>
-					<div>
-						<input type="checkbox" name="global-surcharge" />
-						<input type="number" name="global-surcharge-percentage" />
-						<p>%</p>
+					<div class="setting-item">
+						<p>Header & Footer setting</p>
+						<select>
+							<option>Setting 1</option>
+						</select>
 					</div>
 				</div>
-			</div>
-			<div>
-				<p>Quotation document printing settings</p>
-				<div>
-					<input type="checkbox" name="page-break-before-quotation-table" />
-					<p>Display a page break before the quotation table</p>
-				</div>
-				<div>
-					<input type="checkbox" name="display-customer-details" />
-					<p>Display phone number, email address in the Customer details</p>
-				</div>
-				<div>
-					<input type="checkbox" name="display-quantity-and-unit-price" />
-					<p>Display quantity and unit price columns</p>
-				</div>
-				<div>
-					<input type="checkbox" name="page-break-after-quotation-table" />
-					<p>Display a page break before the quotation table</p>
-				</div>
-				<div>
-					<input type="checkbox" name="quotation-start-date" />
-					<p>Display the quotation start date</p>
-				</div>
-				<div>
-					<input type="checkbox" name="quotation-expiration-date" />
-					<p>Display the quotation expiration date</p>
-				</div>
-				<div>
-					<p>Customer acceptance signature box</p>
+			</details>
+			<details class="section-discount-surcharge-wrapper" open>
+				<summary class="section-discount-surcharge-title">Global discount and global surcharge</summary>
+				<div class="section-discount-surcharge-content">
 					<div>
+						<p>Global discount</p>
 						<div>
-							<input type="radio" name="signature-box" id="no-signature" />
-							<label for="no-signature">No signature</label>
+							<input type="checkbox" name="global-discount" />
+							<input type="number" name="global-discount-percentage" />
+							<p>%</p>
 						</div>
+					</div>
+					<div>
+						<p>Global surcharge</p>
 						<div>
-							<input type="radio" name="signature-box" id="standard" />
-							<label for="standard">Standard</label>
-						</div>
-						<div>
-							<input type="radio" name="signature-box" id="extended" />
-							<label for="extended">Extended</label>
+							<input type="checkbox" name="global-surcharge" />
+							<input type="number" name="global-surcharge-percentage" />
+							<p>%</p>
 						</div>
 					</div>
 				</div>
-				<div>
-					<p>Position of the quotation footer</p>
+			</details>
+			<details class="section-document-settings-wrapper" open>
+				<summary class="section-document-settings-title">Quotation document printing settings</summary>
+				<div class="section-document-settings-content">
 					<div>
+						<input type="checkbox" name="page-break-before-quotation-table" />
+						<p>Display a page break before the quotation table</p>
+					</div>
+					<div>
+						<input type="checkbox" name="display-customer-details" />
+						<p>Display phone number, email address in the Customer details</p>
+					</div>
+					<div>
+						<input type="checkbox" name="display-quantity-and-unit-price" />
+						<p>Display quantity and unit price columns</p>
+					</div>
+					<div>
+						<input type="checkbox" name="page-break-after-quotation-table" />
+						<p>Display a page break before the quotation table</p>
+					</div>
+					<div>
+						<input type="checkbox" name="quotation-start-date" />
+						<p>Display the quotation start date</p>
+					</div>
+					<div>
+						<input type="checkbox" name="quotation-expiration-date" />
+						<p>Display the quotation expiration date</p>
+					</div>
+					<div>
+						<p>Customer acceptance signature box</p>
 						<div>
-							<input type="radio" name="quotation-footer-position" id="after-table-or-totals" />
-							<label for="after-table-or-totals">After table or totals</label>
-						</div>
-						<div>
-							<input type="radio" name="quotation-footer-position" id="before-signature" />
-							<label for="before-signature">Before signature</label>
+							<div>
+								<input type="radio" name="signature-box" id="no-signature" />
+								<label for="no-signature">No signature</label>
+							</div>
+							<div>
+								<input type="radio" name="signature-box" id="standard" />
+								<label for="standard">Standard</label>
+							</div>
+							<div>
+								<input type="radio" name="signature-box" id="extended" />
+								<label for="extended">Extended</label>
+							</div>
 						</div>
 					</div>
+					<div>
+						<p>Position of the quotation footer</p>
+						<div>
+							<div>
+								<input type="radio" name="quotation-footer-position" id="after-table-or-totals" />
+								<label for="after-table-or-totals">After table or totals</label>
+							</div>
+							<div>
+								<input type="radio" name="quotation-footer-position" id="before-signature" />
+								<label for="before-signature">Before signature</label>
+							</div>
+						</div>
+					</div>
+					<div>
+						<p>Letter top template</p>
+						<select>
+							<option>Sender left, receipient right</option>
+							<option>Receipient left, sender right</option>
+						</select>
+					</div>
 				</div>
-				<div>
-					<p>Letter top template</p>
-					<select>
-						<option>Sender left, receipient right</option>
-						<option>Receipient left, sender right</option>
-					</select>
-				</div>
-			</div>
+			</details>
 		</div>
 		<div class="settings-actions">
 			<button class="btn-save">
-				<img src="~/images/icons8-save-100.png" width="50" height="50" alt="save-icon" />
+				<img src="~/images/icons8-save-100.png" width="30" height="30" alt="save-icon" />
 			</button>
 			<button class="btn-discard-change">
-				<img src="~/images/icons8-close-100.png" width="50" height="50" alt="discard-change-icon" />
+				<img src="~/images/icons8-close-100.png" width="30" height="30" alt="discard-change-icon" />
 			</button>
 		</div>
 	</form>
