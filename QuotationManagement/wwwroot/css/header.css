@@ -17,6 +17,7 @@
   position: relative;
   display: grid;
   place-items: center;
+  padding: 0 0.2rem;
 }
 .nav-sub-item {
   position: absolute;
@@ -58,4 +59,7 @@
 }
 .nav-item-link:hover {
   background-color: lightgray;
+}
+.nav-item:hover {
+  background-color: var(--secondary-color);
 }
