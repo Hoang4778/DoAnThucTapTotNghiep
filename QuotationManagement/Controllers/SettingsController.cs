@@ -31,6 +31,10 @@ namespace QuotationManagement.Controllers
         public async Task<IActionResult> Default()
         {
             List<IMBranch> branches = new List<IMBranch>();
+            List<BranchDefaultSettings_QuotationType> quotationTypes = new List<BranchDefaultSettings_QuotationType>();
+            List<BranchDefaultSettings_CustomerAcceptanceBox> customerAcceptanceBoxes = new List<BranchDefaultSettings_CustomerAcceptanceBox>();
+            List<BranchDefaultSettings_QuotationFooterPosition> footerPositions = new List<BranchDefaultSettings_QuotationFooterPosition>();
+            List<BranchDefaultSettings_LetterTopTemplate> templates = new List<BranchDefaultSettings_LetterTopTemplate>();
             string userPUID = "";
 
             var IMApiToken = Environment.GetEnvironmentVariable("IM_API_Access_Token");
@@ -103,6 +107,17 @@ namespace QuotationManagement.Controllers
                 var generalResponse = JsonSerializer.Deserialize<IMBranchResponse>(rawData);
                 branches = generalResponse != null ? generalResponse.data : new List<IMBranch>();
 
+                var allQuotationTypes = await _dbContext.Branch_DefaultSettings_QuotationType.ToListAsync();
+                quotationTypes = allQuotationTypes;
+
+                var allBoxChoices = await _dbContext.Branch_DefaultSettings_CustomerAcceptanceBox.ToListAsync();
+                customerAcceptanceBoxes = allBoxChoices;
+
+                var positions = await _dbContext.Branch_DefaultSettings_QuotationFooterPosition.ToListAsync();
+                footerPositions = positions;
+
+                var allTemplates = await _dbContext.Branch_DefaultSettings_LetterTopTemplate.ToListAsync();
+                templates = allTemplates;
             }
             catch (Exception ex)
             {
@@ -113,7 +128,16 @@ namespace QuotationManagement.Controllers
                 });
             }
 
-            return View("/Views/Settings/Default.cshtml", branches);
+            View_BranchDefaultSettings viewModel = new View_BranchDefaultSettings()
+            {
+                branches = branches,
+                quotationTypes = quotationTypes,
+                customerAcceptanceBoxChoices = customerAcceptanceBoxes,
+                footerPositions = footerPositions,
+                letterTopTemplates = templates
+            };
+
+            return View("/Views/Settings/Default.cshtml", viewModel);
         }
 
         public async Task<IActionResult> HeaderFooter()

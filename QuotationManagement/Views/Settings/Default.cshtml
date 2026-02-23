@@ -1,16 +1,16 @@
-﻿@model List<QuotationManagement.Models.ExternalModels.IMBranch>
+﻿@model QuotationManagement.Models.ViewModels.View_BranchDefaultSettings
 
 @{
 }
 
-<link rel="stylesheet" href="~/css/settings-default.css" />
+<link rel="stylesheet" href="~/css/branch-default-settings.css" />
 
 <div class="wrapper section-wrapper">
 	<div class="branch-option">
 		<label for="branch-option">Choose the branch:</label>
 		<select id="branch-option" class="select-branch">
 			<option value=""></option>
-			@foreach (var branch in Model)
+			@foreach (var branch in Model.branches)
 			{
 				<option value="@branch.branchCode">@branch.name</option>
 			}
@@ -24,18 +24,18 @@
 				<div class="section-quotation-settings-content">
 					<div class="setting-item">
 						<p>Quotation type:</p>
-						<div>
-							<input type="radio" name="quotation-type" id="standard-quotation" />
-							<label for="standard-quotation">Standard quotation</label>
-						</div>
-						<div>
-							<input type="radio" name="quotation-type" id="project-quotation" />
-							<label for="project-quotation">Project quotation</label>
-						</div>
+						@foreach (var quotationType in Model.quotationTypes)
+						{
+							<div>
+								<input type="radio" name="quotation-type" id="@($"quotation-type-{quotationType.id}")"
+									   value="@quotationType.id" />
+								<label for="@($"quotation-type-{quotationType.id}")">@quotationType.name</label>
+							</div>
+						}
 					</div>
 					<div class="setting-item">
 						<p>Default tax rate:</p>
-						<input type="number" class="input-default-tax-rate"/>
+						<input type="number" class="input-default-tax-rate" />
 						<p>%</p>
 					</div>
 					<div class="setting-item">
@@ -53,7 +53,8 @@
 						<p>Global discount:</p>
 						<div class="setting-item">
 							<input type="checkbox" name="global-discount" />
-							<input type="number" name="global-discount-percentage" class="input-global-discount" disabled/>
+							<input type="number" name="global-discount-percentage" class="input-global-discount"
+								   disabled />
 							<p>%</p>
 						</div>
 					</div>
@@ -61,7 +62,8 @@
 						<p>Global surcharge:</p>
 						<div class="setting-item">
 							<input type="checkbox" name="global-surcharge" />
-							<input type="number" name="global-surcharge-percentage" class="input-global-surcharge" disabled/>
+							<input type="number" name="global-surcharge-percentage" class="input-global-surcharge"
+								   disabled />
 							<p>%</p>
 						</div>
 					</div>
@@ -84,7 +86,7 @@
 					</div>
 					<div class="setting-item">
 						<input type="checkbox" name="page-break-after-quotation-table" />
-						<p>Display a page break before the quotation table</p>
+						<p>Display a page break after the quotation table</p>
 					</div>
 					<div class="setting-item">
 						<input type="checkbox" name="quotation-start-date" />
@@ -97,38 +99,35 @@
 					<div class="setting-item">
 						<p>Customer acceptance signature box:</p>
 						<div class="setting-item">
-							<div>
-								<input type="radio" name="signature-box" id="no-signature" />
-								<label for="no-signature">No signature</label>
-							</div>
-							<div>
-								<input type="radio" name="signature-box" id="standard" />
-								<label for="standard">Standard</label>
-							</div>
-							<div>
-								<input type="radio" name="signature-box" id="extended" />
-								<label for="extended">Extended</label>
-							</div>
+							@foreach (var boxChoice in Model.customerAcceptanceBoxChoices)
+							{
+								<div>
+									<input type="radio" name="signature-box" id="@($"Choice-{boxChoice.id}")" />
+									<label for="@($"Choice-{boxChoice.id}")">@boxChoice.name</label>
+								</div>
+							}
 						</div>
 					</div>
 					<div class="setting-item">
 						<p>Position of the quotation footer:</p>
 						<div class="setting-item">
-							<div>
-								<input type="radio" name="quotation-footer-position" id="after-table-or-totals" />
-								<label for="after-table-or-totals">After table or totals</label>
-							</div>
-							<div>
-								<input type="radio" name="quotation-footer-position" id="before-signature" />
-								<label for="before-signature">Before signature</label>
-							</div>
+							@foreach (var position in Model.footerPositions)
+							{
+								<div>
+									<input type="radio" name="quotation-footer-position"
+										   id="@($"Position-{position.id}")" />
+									<label for="@($"Position-{position.id}")">@position.name</label>
+								</div>
+							}
 						</div>
 					</div>
 					<div class="setting-item">
 						<p>Letter top template:</p>
 						<select class="select-letter-top-template">
-							<option>Sender left, receipient right</option>
-							<option>Receipient left, sender right</option>
+							@foreach (var template in Model.letterTopTemplates)
+							{
+								<option value="@template.id">@template.name</option>
+							}
 						</select>
 					</div>
 				</div>
@@ -141,3 +140,7 @@
 		</div>
 	</form>
 </div>
+@await Html.PartialAsync("_LoadingPart")
+@await Html.PartialAsync("_Popup")
+
+<script src="~/js/branch-default-settings.js" defer></script>
