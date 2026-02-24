@@ -52,7 +52,7 @@
 					<div class="setting-item">
 						<p>Global discount:</p>
 						<div class="setting-item">
-							<input type="checkbox" name="global-discount" />
+							<input type="checkbox" name="global-discount" class="checkbox-has-global-discount"/>
 							<input type="number" name="global-discount-percentage" class="input-global-discount"
 								   disabled />
 							<p>%</p>
@@ -61,7 +61,7 @@
 					<div class="setting-item">
 						<p>Global surcharge:</p>
 						<div class="setting-item">
-							<input type="checkbox" name="global-surcharge" />
+							<input type="checkbox" name="global-surcharge" class="checkbox-has-global-surcharge"/>
 							<input type="number" name="global-surcharge-percentage" class="input-global-surcharge"
 								   disabled />
 							<p>%</p>
@@ -73,27 +73,27 @@
 				<summary class="section-document-settings-title">Quotation document printing settings</summary>
 				<div class="section-document-settings-content">
 					<div class="setting-item">
-						<input type="checkbox" name="page-break-before-quotation-table" />
+						<input type="checkbox" name="page-break-before-quotation-table" class="checkbox-page-break-before-quotation-table"/>
 						<p>Display a page break before the quotation table</p>
 					</div>
 					<div class="setting-item">
-						<input type="checkbox" name="display-customer-details" />
+						<input type="checkbox" name="display-customer-details" class="checkbox-display-customer-details"/>
 						<p>Display phone number, email address in the Customer details</p>
 					</div>
 					<div class="setting-item">
-						<input type="checkbox" name="display-quantity-and-unit-price" />
+						<input type="checkbox" name="display-quantity-and-unit-price" class="checkbox-display-quantity-and-unit-price"/>
 						<p>Display quantity and unit price columns</p>
 					</div>
 					<div class="setting-item">
-						<input type="checkbox" name="page-break-after-quotation-table" />
+						<input type="checkbox" name="page-break-after-quotation-table" class="checkbox-page-break-after-quotation-table"/>
 						<p>Display a page break after the quotation table</p>
 					</div>
 					<div class="setting-item">
-						<input type="checkbox" name="quotation-start-date" />
+						<input type="checkbox" name="quotation-start-date" class="checkbox-quotation-start-date"/>
 						<p>Display the quotation start date</p>
 					</div>
 					<div class="setting-item">
-						<input type="checkbox" name="quotation-expiration-date" />
+						<input type="checkbox" name="quotation-expiration-date" class="checkbox-quotation-expiration-date"/>
 						<p>Display the quotation expiration date</p>
 					</div>
 					<div class="setting-item">
@@ -102,7 +102,7 @@
 							@foreach (var boxChoice in Model.customerAcceptanceBoxChoices)
 							{
 								<div>
-									<input type="radio" name="signature-box" id="@($"Choice-{boxChoice.id}")" />
+									<input type="radio" name="signature-box" id="@($"Choice-{boxChoice.id}")" value="@boxChoice.id"/>
 									<label for="@($"Choice-{boxChoice.id}")">@boxChoice.name</label>
 								</div>
 							}
@@ -115,7 +115,7 @@
 							{
 								<div>
 									<input type="radio" name="quotation-footer-position"
-										   id="@($"Position-{position.id}")" />
+										   id="@($"Position-{position.id}")" value="@position.id"/>
 									<label for="@($"Position-{position.id}")">@position.name</label>
 								</div>
 							}
