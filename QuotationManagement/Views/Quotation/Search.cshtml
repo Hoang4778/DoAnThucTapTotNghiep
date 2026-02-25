@@ -1,76 +1,79 @@
 ﻿@{
 }
 
-<div>
-	<form >
-		<input placeholder="Quotation code" type="text" />
-		<input placeholder="Quotation name" type="text" />
-		<input placeholder="Customer name" type="text" />
-		<input placeholder="Account code" type="text" />
-		<div>
-			<p>Creation date</p>
-			<div>
-				<label>From</label>
-				<input type="date" />
+<link rel="stylesheet" href="~/css/quotation-search.css" />
+<script src="~/js/quotation-search.js" defer></script>
+
+<div class="wrapper section-wrapper">
+	<form class="search-form">
+		<div class="search-criteria">
+			<input placeholder="Quotation code" type="text" class="input-quotation-code input-search-criteria" />
+			<input placeholder="Quotation name" type="text" class="input-quotation-name input-search-criteria" />
+			<input placeholder="Customer name" type="text" class="input-customer-name input-search-criteria" />
+			<input placeholder="Account code" type="text" class="input-account-code input-search-criteria" />
+		</div>
+		<div class="search-criteria">
+			<p>Creation date:</p>
+			<div class="search-criteria">
+				<label for="creation-date-from">From</label>
+				<input type="date" class="input-creation-date-from input-search-criteria" id="creation-date-from" />
 			</div>
-			<div>
-				<label>To</label>
-				<input type="date" />
+			<div class="search-criteria">
+				<label for="creation-date-to">To</label>
+				<input type="date" class="input-creation-date-to input-search-criteria" id="creation-date-to" />
 			</div>
 		</div>
-		<div>
-			<p>Expiration date</p>
-			<div>
-				<label>From</label>
-				<input type="date" />
+		<div class="search-criteria">
+			<p>Expiration date:</p>
+			<div class="search-criteria">
+				<label for="expiration-date-from">From</label>
+				<input type="date" class="input-expiration-date-from input-search-criteria" id="expiration-date-from" />
 			</div>
-			<div>
-				<label>To</label>
-				<input type="date" />
-			</div>
-		</div>
-		<div>
-			<p>Quotation status</p>
-			<div>
-				<input type="checkbox" name="quotation-status-in-progress" value="in-progress" />
-				<input type="checkbox" name="quotation-status-validated" value="validated" />
-				<input type="checkbox" name="quotation-status-expired" value="expired" />
-				<input type="checkbox" name="quotation-status-cancelled" value="cancelled" />
+			<div class="search-criteria">
+				<label for="expiration-date-to">To</label>
+				<input type="date" class="input-expiration-date-to input-search-criteria" id="expiration-date-to" />
 			</div>
 		</div>
-		<button type="submit">Submit</button>
+		<div class="search-criteria">
+			<p>Quotation status:</p>
+			<div class="search-criteria">
+				<div>
+					<input type="checkbox" name="quotation-status-in-progress" value="in-progress" id="status-in-progress" class="checkbox-status-in-progress"/>
+					<label for="status-in-progress">In progress</label>
+				</div>
+				<div>
+					<input type="checkbox" name="quotation-status-validated" value="validated" id="status-validated" class="checkbox-status-validated"/>
+					<label for="status-validated">Validated</label>
+				</div>
+				<div>
+					<input type="checkbox" name="quotation-status-expired" value="expired" id="status-expired" class="checkbox-status-expired"/>
+					<label for="status-expired">Expired</label>
+				</div>
+				<div>
+					<input type="checkbox" name="quotation-status-cancelled" value="cancelled" id="status-cancelled" class="checkbox-status-cancelled"/>
+					<label for="status-cancelled">Cancelled</label>
+				</div>
+			</div>
+		</div>
+		<button type="submit" class="btn-search-quotation">
+			<img src="~/images/icons8-search-100.png" width="30" height="30" alt="Search quotations" />
+		</button>
 	</form>
-	<div>
-		<table>
-			<thead>
-				<tr>
-					<th>Quotation - Version</th>
-					<th>Account code</th>
-					<th>Account name</th>
-					<th>Account city</th>
-					<th>Quotation name</th>
-					<th>Total price</th>
-					<th>Status</th>
-					<th>Accepted by customer</th>
-					<th>Start date</th>
-					<th>Expiration date</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td>V5ARQU260001-01</td>
-					<td>ADE040486</td>
-					<td>Langer, Dr.Stefan</td>
-					<td>Berlin</td>
-					<td></td>
-					<td>0.00 EUR</td>
-					<td>In progress</td>
-					<td>false</td>
-					<td>01/23/2026</td>
-					<td>01/23/2027</td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
+	<table width="100%">
+		<tr>
+			<th>Quotation - Version</th>
+			<th>Account code</th>
+			<th>Account name</th>
+			<th>Account city</th>
+			<th>Quotation name</th>
+			<th>Total price</th>
+			<th>Status</th>
+			<th>Accepted by customer</th>
+			<th>Start date</th>
+			<th>Expiration date</th>
+		</tr>
+	</table>
 </div>
 
+@await Html.PartialAsync("_LoadingPart")
+@await Html.PartialAsync("_Popup")

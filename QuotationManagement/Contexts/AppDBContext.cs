@@ -14,5 +14,6 @@ namespace QuotationManagement.Contexts
         public DbSet<BranchDefaultSettings_CustomerAcceptanceBox> Branch_DefaultSettings_CustomerAcceptanceBox { get; set; }
         public DbSet<BranchDefaultSettings_QuotationFooterPosition> Branch_DefaultSettings_QuotationFooterPosition { get; set; }
         public DbSet<BranchDefaultSettings_LetterTopTemplate> Branch_DefaultSettings_LetterTopTemplate { get; set; }
+        public DbSet<Quotation> Quotation { get; set; }
     }
 }
