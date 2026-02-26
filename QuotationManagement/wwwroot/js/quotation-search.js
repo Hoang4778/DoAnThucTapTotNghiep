@@ -1,5 +1,6 @@
 ﻿const btnSearchQuotation = document.querySelector(".btn-search-quotation");
 const loadingPart = document.querySelector(".loading-part");
+const quotationListTable = document.querySelector(".quotation-list");
 
 btnSearchQuotation.onclick = (e) => {
   e.preventDefault();
@@ -50,6 +51,19 @@ btnSearchQuotation.onclick = (e) => {
       loadingPart.classList.remove("active");
 
       if (result.isOkay) {
+        quotationListTable.innerHTML = "";
+
+        result.data.forEach((q) => {
+          const row = document.createElement("tr");
+
+          for (const attr in q) {
+            const cell = document.createElement("td");
+            cell.textContent = q[attr];
+            row.appendChild(cell);
+          }
+
+          quotationListTable.appendChild(row);
+        });
       } else {
         showPopup(result.message);
       }
