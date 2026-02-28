@@ -10,3 +10,104 @@
 - Step 5: Choose quotation setup: Quotation type (standard/project) <= Branch default setting; Applicable for Accelerated Logistic Process (Yes/No) 
 - Step 6: Check the summary: Branch - Name, Account - Code and Name, Account contact - Code and name, Price list - code and name, Quotation type - name, Applicable for Accelerated Logistic Process - Yes or No
 - Step 7: Submit or Cancel the process
+
+<form method="post">
+	<div>
+		<details>
+			<summary>Branch</summary>
+			<div>
+				<p>Choose a branch</p>
+				<select>
+					<option>Branch 1</option>
+				</select>
+			</div>
+		</details>
+		<details>
+			<summary>Client account</summary>
+			<div>
+				<p>Choose an account</p>
+				<select>
+					<option>Account 1</option>
+				</select>
+			</div>
+		</details>
+		<details>
+			<summary>Client account contact</summary>
+			<div>
+				<p>Choose an account contact</p>
+				<select>
+					<option>Contact 1</option>
+				</select>
+			</div>
+		</details>
+		<details>
+			<summary>Price list</summary>
+			<div>
+				<p>Choose one list price</p>
+				<select>
+					<option>List price 1</option>
+				</select>
+			</div>
+		</details>
+		<details>
+			<summary>Quotation setup</summary>
+			<div>
+				<div>
+					<p>Quotation type</p>
+					<div>
+						<input type="radio" name="quotation-type" id="type-standard" />
+						<label for="type-standard">Standard quotation</label>
+					</div>
+					<div>
+						<input type="radio" name="quotation-type" id="type-project" />
+						<label for="type-project">Project quotation</label>
+					</div>
+				</div>
+				<div>
+					<p>Applicable for Accelerated Logistic Process</p>
+					<div>
+						<input type="radio" name="applicable-for-ALP" id="applicable-for-ALP-yes" />
+						<label for="applicable-for-ALP-yes">Yes</label>
+					</div>
+					<div>
+						<input type="radio" name="applicable-for-ALP" id="applicable-for-ALP-no" />
+						<label for="applicable-for-ALP-no">No</label>
+					</div>
+				</div>
+			</div>
+		</details>
+		<details>
+			<summary>Summary</summary>
+			<div>
+				<div>
+					<p>Branch:</p>
+					<p>Branch 1</p>
+				</div>
+				<div>
+					<p>Client account:</p>
+					<p>Account code - Account 1</p>
+				</div>
+				<div>
+					<p>Client account contact:</p>
+					<p>Contact code - Contact 1</p>
+				</div>
+				<div>
+					<p>Price list:</p>
+					<p>Price code - List price 1</p>
+				</div>
+				<div>
+					<p>Quotation type:</p>
+					<p>Standard</p>
+				</div>
+				<div>
+					<p>Applicable for Accelerated Logistic Process:</p>
+					<p>Yes</p>
+				</div>
+			</div>
+		</details>
+	</div>
+	<div>
+		<button type="submit">Create</button>
+		<button>Cancel</button>
+	</div>
+</form>
