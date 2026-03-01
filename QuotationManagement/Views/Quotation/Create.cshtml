@@ -1,59 +1,67 @@
-﻿@{
+﻿@model List<QuotationManagement.Models.ExternalModels.IMBranch>
+
+@{
 }
 
-<h1>Create quotation</h1>
+<h1 class="page-title">Create quotation</h1>
 
-- Step 1: Choose active branch in sales scope that user has
-- Step 2: Choose top 50 active client accounts from sales scope that the branch belongs to
-- Step 3: Choose active client account contact for the chosen account
-- Step 4: Choose the active price list of the chosen branch
-- Step 5: Choose quotation setup: Quotation type (standard/project) <= Branch default setting; Applicable for Accelerated Logistic Process (Yes/No) 
-- Step 6: Check the summary: Branch - Name, Account - Code and Name, Account contact - Code and name, Price list - code and name, Quotation type - name, Applicable for Accelerated Logistic Process - Yes or No
-- Step 7: Submit or Cancel the process
+<link rel="stylesheet" href="~/css/quotation-create.css" />
 
-<form method="post">
-	<div>
-		<details>
-			<summary>Branch</summary>
-			<div>
-				<p>Choose a branch</p>
-				<select>
-					<option>Branch 1</option>
-				</select>
+<form method="post" class="wrapper section-wrapper">
+	<div class="inner-form">
+		<details class="section-choose-branch-wrapper" open>
+			<summary class="section-choose-branch-title">Branch</summary>
+			<div class="section-choose-branch-content">
+				<div class="input-wrapper">
+					<p>Choose a branch:</p>
+					<select class="select-branch">
+						<option value=""></option>
+						@foreach (var branch in Model)
+						{
+							<option value="@branch.branchCode">@branch.name</option>
+						}
+					</select>
+				</div>
 			</div>
 		</details>
-		<details>
-			<summary>Client account</summary>
-			<div>
-				<p>Choose an account</p>
-				<select>
-					<option>Account 1</option>
-				</select>
+		<details class="section-choose-account-wrapper">
+			<summary class="section-choose-account-title">Client account</summary>
+			<div class="section-choose-account-content">
+				<div class="input-wrapper">
+					<p>Choose an account:</p>
+					<select class="select-account">
+						<option value=""></option>
+					</select>
+				</div>
 			</div>
 		</details>
-		<details>
-			<summary>Client account contact</summary>
-			<div>
-				<p>Choose an account contact</p>
-				<select>
-					<option>Contact 1</option>
-				</select>
+		<details class="section-choose-contact-wrapper">
+			<summary class="section-choose-contact-title">Client account contact</summary>
+			<div class="section-choose-contact-content">
+				<div class="input-wrapper">
+					<p>Choose an account contact:</p>
+					<select class="select-contact">
+						<option value=""></option>
+					</select>
+				</div>
 			</div>
 		</details>
-		<details>
-			<summary>Price list</summary>
-			<div>
-				<p>Choose one list price</p>
-				<select>
-					<option>List price 1</option>
-				</select>
+		<details class="section-choose-list-price-wrapper">
+			<summary class="section-choose-list-price-title">Price list</summary>
+			<div class="section-choose-list-price-content">
+				<div class="input-wrapper">
+					<p>Choose one list price:</p>
+					<select class="select-list-price">
+						<option value=""></option>
+					</select>
+				</div>
 			</div>
 		</details>
-		<details>
-			<summary>Quotation setup</summary>
-			<div>
-				<div>
-					<p>Quotation type</p>
+		<details class="section-quotation-setup-wrapper">
+			<summary class="section-quotation-setup-title">Quotation setup</summary>
+			<div class="section-quotation-setup-content">
+				<div class="input-wrapper">
+					<p>Quotation type:</p>
 					<div>
 						<input type="radio" name="quotation-type" id="type-standard" />
 						<label for="type-standard">Standard quotation</label>
@@ -63,8 +71,8 @@
 						<label for="type-project">Project quotation</label>
 					</div>
 				</div>
-				<div>
-					<p>Applicable for Accelerated Logistic Process</p>
+				<div class="input-wrapper">
+					<p>Applicable for Accelerated Logistic Process:</p>
 					<div>
 						<input type="radio" name="applicable-for-ALP" id="applicable-for-ALP-yes" />
 						<label for="applicable-for-ALP-yes">Yes</label>
@@ -76,38 +84,47 @@
 				</div>
 			</div>
 		</details>
-		<details>
-			<summary>Summary</summary>
-			<div>
-				<div>
+		<details class="section-summary-wrapper">
+			<summary class="section-summary-title">Summary</summary>
+			<div class="section-summary-content">
+				<div class="summary-item">
 					<p>Branch:</p>
 					<p>Branch 1</p>
 				</div>
-				<div>
+				<div class="summary-item">
 					<p>Client account:</p>
 					<p>Account code - Account 1</p>
 				</div>
-				<div>
+				<div class="summary-item">
 					<p>Client account contact:</p>
 					<p>Contact code - Contact 1</p>
 				</div>
-				<div>
+				<div class="summary-item">
 					<p>Price list:</p>
 					<p>Price code - List price 1</p>
 				</div>
-				<div>
+				<div class="summary-item">
 					<p>Quotation type:</p>
 					<p>Standard</p>
 				</div>
-				<div>
+				<div class="summary-item">
 					<p>Applicable for Accelerated Logistic Process:</p>
 					<p>Yes</p>
 				</div>
 			</div>
 		</details>
 	</div>
-	<div>
-		<button type="submit">Create</button>
-		<button>Cancel</button>
+	<div class="section-form-actions">
+		<button class="btn-cancel-creation">
+			<img src="~/images/icons8-close-100.png" width="30" height="30" alt="cancel-creation" />
+		</button>
+		<button type="submit" class="btn-create-quotation">
+			<img src="~/images/icons8-save-100.png" width="30" height="30" alt="create-quotation" />
+		</button>
 	</div>
 </form>
+
+@await Html.PartialAsync("_LoadingPart")
+@await Html.PartialAsync("_Popup")
+
+<script src="~/js/quotation-create.js" defer></script>
